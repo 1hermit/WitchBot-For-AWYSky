@@ -148,12 +148,13 @@ async def main():
                     if data["post_type"] != "meta_event":
                         if data["post_type"] == "message":  # 消息事件
                             if data["message_type"] == "group":  # 群聊消息
-                                # 展示收到的消息
-                                PrintMessage(data)
+                                if data["group_id"] == 897259899:
+                                    # 展示收到的消息
+                                    PrintMessage(data)
 
-                                # 保存最新收到的消息
-                                variable.isLastMessageProcessed = False
-                                saveLastMessage(data)
+                                    # 保存最新收到的消息
+                                    variable.isLastMessageProcessed = False
+                                    saveLastMessage(data)
 
                                 # 在下方添加指令
 
