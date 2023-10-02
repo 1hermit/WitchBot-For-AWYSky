@@ -5,6 +5,8 @@ import json
 class Config:  # Class:程序设置
     # 程序版本号
     version = "1.0.0"
+    # 程序标题
+    title = "小巫正"
     # 服务器端口
     port = 8080
     # 服务器IP
