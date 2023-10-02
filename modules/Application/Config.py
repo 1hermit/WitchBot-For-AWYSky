@@ -30,6 +30,7 @@ class Config:  # Class:程序设置
         with open(filePath, "r", encoding="utf-8") as f:
             data = json.load(f)
             self.version = data["version"]
+            self.title = data["title"]
             self.port = data["port"]
             self.ip = data["ip"]
             self.master = data["master"]
@@ -44,6 +45,7 @@ class Config:  # Class:程序设置
             json.dump(
                 {
                     "version": self.version,
+                    "title": self.title,
                     "port": self.port,
                     "ip": self.ip,
                     "master": self.master,
@@ -63,6 +65,7 @@ class Config:  # Class:程序设置
             json.dump(
                 {
                     "version": self.version,
+                    "title": "小巫正",
                     "port": 8080,
                     "ip": "127.0.0.1",
                     "master": 0,

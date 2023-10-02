@@ -105,6 +105,7 @@ def PrintMessage(data):
 
 # 主程序
 async def main():
+    os.system("title " + config.title)  # 设置窗口标题
     try:
         async with websockets.connect(
             "ws://" + config.ip + ":" + str(config.port)

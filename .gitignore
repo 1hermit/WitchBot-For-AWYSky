@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 # Bot
-data/
+data/blacklist.txt
 message/
