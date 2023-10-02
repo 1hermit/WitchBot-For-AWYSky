@@ -198,7 +198,8 @@ async def main():
                                     await websocket.send(
                                         SendGroupMessage(
                                             data["group_id"],
-                                            "欢迎新人！\n请先阅读群公告，了解群规则。\n然后请发送你的光遇名称，以便管理为您添加头衔\n若您在两天后仍然处于无头衔状态\n您将被踢出群聊并拉入黑名单！",
+                                            CQCode("at", data["user_id"])
+                                            + "欢迎新人！\n请先阅读群公告，了解群规则。\n然后请发送你的光遇名称，以便管理为您添加头衔\n若您在两天后仍然处于无头衔状态\n您将被踢出群聊并拉入黑名单！",
                                         ).dump()
                                     )
                                     Printc(
