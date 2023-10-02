@@ -1,7 +1,9 @@
 import datetime
+from colorama import init
 
 
 def Printc(string, printType="error"):  # 函数:打印带提示信息和颜色的文字
+    init(autoreset=True)
     nowTime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # 获取当前时间
     printType = printType.lower()
     if printType == "e":

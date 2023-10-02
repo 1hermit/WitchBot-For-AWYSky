@@ -158,10 +158,10 @@ async def main():
                                 # 在下方添加指令
 
                         if data["post_type"] == "notice":  # 通知事件（如群成员增加，群成员减少等）
+                            # 光遇群号判断
                             # 群成员减少，则拉入黑名单
-                            if data["notice_type"] == "group_decrease":
-                                # 光遇群号判断
-                                if data["group_id"] == 897259899:
+                            if data["group_id"] == 897259899:
+                                if data["notice_type"] == "group_decrease":
                                     Printc(
                                         "检测到光遇群成员减少，正在拉入黑名单",
                                         "I",
@@ -175,6 +175,33 @@ async def main():
                                         f.write(str(data["user_id"]) + "\n")
                                     Printc(
                                         "已将 " + str(data["user_id"]) + " 拉入黑名单",
+                                        "I",
+                                    )
+                                    await websocket.send(
+                                        SendGroupMessage(
+                                            data["group_id"],
+                                            "【小巫正】\n群成员"
+                                            + data["user_id"]
+                                            + "已退群\n已将 "
+                                            + str(data["user_id"])
+                                            + " 拉入黑名单",
+                                        ).dump()
+                                    )
+                                # 群成员增加，则发送欢迎消息
+                                if data["notice_type"] == "group_increase":
+                                    Printc(
+                                        "检测到光遇群成员增加，正在发送欢迎消息",
+                                        "I",
+                                    )
+                                    # 发送欢迎消息
+                                    await websocket.send(
+                                        SendGroupMessage(
+                                            data["group_id"],
+                                            "欢迎新人！\n请先阅读群公告，了解群规则。\n然后请发送你的光遇名称，以便管理为您添加头衔\n若您在两天后仍然处于无头衔状态\n您将被踢出群聊并拉入黑名单！",
+                                        ).dump()
+                                    )
+                                    Printc(
+                                        "已发送欢迎消息至 " + str(data["group_id"]),
                                         "I",
                                     )
 
