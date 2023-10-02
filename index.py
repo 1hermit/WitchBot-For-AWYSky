@@ -30,11 +30,6 @@ from modules.MessageUpload.DeleteMsg import DeleteMsg
 config = Config()  # 实例化Config类
 variable = Variable()  # 实例化Variable类
 
-# 逐行打印Logo
-with open(variable.logoFilePath, "r", encoding="utf-8") as f:
-    for line in f.readlines():
-        print(line.strip("\n"))
-
 
 # 启动自检
 def checkBeforeStart():
