@@ -158,11 +158,22 @@ async def main():
                                     saveLastMessage(data)
 
                                     # 在下方添加指令
-                                    if variable.lastMessageSenderNickname == "请修改群备注":
+                                    if (
+                                        variable.lastMessageSenderNickname == "请修改群备注"
+                                        or variable.lastMessageSenderNickname == "🌹"
+                                    ):
+                                        Printc(
+                                            "检测到新人，正在撤回消息",
+                                            "I",
+                                        )
                                         await websocket.send(
                                             DeleteMsg(
                                                 variable.lastMessageID,
-                                            ).dump
+                                            ).dump()
+                                        )
+                                        Printc(
+                                            "已撤回消息",
+                                            "I",
                                         )
                                         await websocket.send(
                                             SendGroupMessage(
