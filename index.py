@@ -75,7 +75,11 @@ def checkBeforeStart():
 def saveLastMessage(data):
     variable.lastMessage = data["message"]
     variable.lastMessageSender = data["sender"]["user_id"]
-    variable.lastMessageSenderNickname = data["sender"]["card"]
+    variable.lastMessageSenderNickname = (
+        data["sender"]["card"]
+        if data["sender"]["card"] != ""
+        else data["sender"]["nickname"]
+    )
     variable.isGroupMessage = True
     variable.lastMessageGroup = data["group_id"]
     variable.lastMessageID = data["message_id"]
