@@ -153,7 +153,22 @@ async def main():
                                     variable.isLastMessageProcessed = False
                                     saveLastMessage(data)
 
-                                # 在下方添加指令
+                                    # 在下方添加指令
+                                    if variable.lastMessageSenderNickname == "请修改群备注":
+                                        await websocket.send(
+                                            DeleteMsg(
+                                                variable.lastMessageID,
+                                            ).dump
+                                        )
+                                        await websocket.send(
+                                            SendGroupMessage(
+                                                variable.lastMessageGroup,
+                                                CQCode(
+                                                    "at", variable.lastMessageSender
+                                                ).dump()
+                                                + "请修改群备注之后再发言",
+                                            ).dump()
+                                        )
 
                         if data["post_type"] == "notice":  # 通知事件（如群成员增加，群成员减少等）
                             # 光遇群号判断
