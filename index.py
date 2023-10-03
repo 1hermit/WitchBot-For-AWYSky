@@ -26,6 +26,7 @@ from modules.MessageUpload.SendGroupMessage import SendGroupMessage
 from modules.MessageUpload.SetGroupKick import SetGroupKick
 from modules.MessageUpload.GetBotInfo import GetBotInfo
 from modules.MessageUpload.DeleteMsg import DeleteMsg
+from modules.MessageUpload.SetGroupCard import SetGroupCard
 
 config = Config()  # 实例化Config类
 variable = Variable()  # 实例化Variable类
@@ -177,8 +178,8 @@ async def main():
                                     await websocket.send(
                                         SendGroupMessage(
                                             data["group_id"],
-                                            "【小巫正】\n群成员"
-                                            + data["user_id"]
+                                            "\n群成员"
+                                            + str(data["user_id"])
                                             + "已退群\n已将 "
                                             + str(data["user_id"])
                                             + " 拉入黑名单",
@@ -195,9 +196,18 @@ async def main():
                                         SendGroupMessage(
                                             data["group_id"],
                                             CQCode("at", data["user_id"]).dump()
-                                            + "欢迎新人！\n请先阅读群公告，了解群规则。\n然后请发送你的光遇名称，以便管理为您添加头衔\n若您在两天后仍然处于无头衔状态\n您将被踢出群聊并拉入黑名单！",
+                                            + "欢迎新人！\n请先阅读群公告，了解群规则。\n然后请发送你的光遇名称并将群昵称修改成你的光遇名字，以便管理为您添加头衔\n若您在两天后仍然处于无头衔状态\n您将被踢出群聊并拉入黑名单！",
                                         ).dump()
                                     )
+                                    # 修改群名片
+                                    await websocket.send(
+                                        SetGroupCard(
+                                            data["group_id"],
+                                            data["user_id"],
+                                            "请修改群备注",
+                                        ).dump()
+                                    )
+
                                     Printc(
                                         "已发送欢迎消息至 " + str(data["group_id"]),
                                         "I",
